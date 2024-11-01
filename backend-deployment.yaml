@@ -12,6 +12,10 @@ spec:
       labels:
         app: backend
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - name: backend
           image: iqrazafar865/20i-2328_mlops2-backend:latest
@@ -32,3 +36,4 @@ spec:
       targetPort: 5000
   selector:
     app: backend
+
