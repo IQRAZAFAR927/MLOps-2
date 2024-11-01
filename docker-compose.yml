@@ -1,0 +1,37 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"  # Maps port 80 of Nginx to localhost:3000
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/MLOps2 # Replace 'mydatabase' with your DB name
+    depends_on:
+      - mongo
+
+  auth:
+    build:
+      context: ./auth
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/MLOps2  # Ensure this matches backend
+
+  mongo:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
