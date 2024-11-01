@@ -12,6 +12,10 @@ spec:
       labels:
         app: mongo
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - name: mongo
           image: mongo:latest
@@ -35,3 +39,4 @@ spec:
       targetPort: 27017
   selector:
     app: mongo
+
