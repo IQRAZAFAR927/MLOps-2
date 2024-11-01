@@ -9,4 +9,4 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30001  # Change this if you want a different port
+      nodePort: 30601  # Change this if you want a different port
